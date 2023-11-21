@@ -11,8 +11,25 @@ public class PessoaDAO {
         this.connection = new Conexao().GeraConexao();
     }
 
+//    private boolean pessoaJaExiste(int idPessoa) {
+//        String sql = "SELECT COUNT(*) FROM pessoas WHERE id_pessoa = ?";
+//        try {
+//            PreparedStatement stmt = connection.prepareStatement(sql);
+//            stmt.setInt(1, idPessoa);
+//            ResultSet resultSet = stmt.executeQuery();
+//            int count = resultSet.getInt(1);
+//            stmt.close();
+//            return count > 0;
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
     // Create
     public void adiciona(Pessoa pessoa) {
+//        if (pessoaJaExiste(pessoa.getIdPessoa())) { System.out.println("Pessoa com ID " + pessoa.getIdPessoa() + " já existe na tabela."); return;
+//        }
+
         String sql = "INSERT INTO pessoas(id_pessoa, nome_pessoa, cidade, estado, email, whatsapp) VALUES(?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
