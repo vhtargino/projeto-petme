@@ -34,6 +34,10 @@ public class Apadrinhamento {
 
     public void setAnimal(Animal animal) {
         this.animal = animal;
+        // Se o animal for definido, você pode extrair o ID e definir o idAnimalApadrinhado
+        if (animal != null) {
+            this.idAnimalApadrinhado = animal.getIdAnimal();
+        }
     }
 
     public Pessoa getPessoa() {
@@ -42,6 +46,10 @@ public class Apadrinhamento {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+        // Se a pessoa for definida, você pode extrair o ID e definir o idPessoaPadrinho
+        if (pessoa != null) {
+            this.idPessoaPadrinho = pessoa.getIdPessoa();
+        }
     }
 
     public int getIdPessoaPadrinho() {
@@ -58,16 +66,5 @@ public class Apadrinhamento {
 
     public void setIdAnimalApadrinhado(int idAnimalApadrinhado) {
         this.idAnimalApadrinhado = idAnimalApadrinhado;
-    }
-
-    // Métodos
-    public int pegarIdInstanciaPessoa() {
-        idPessoaPadrinho = pessoa.getIdPessoa();
-        return idPessoaPadrinho;
-    }
-
-    public int pegarIdInstanciaAnimal() {
-        idAnimalApadrinhado = animal.getIdAnimal();
-        return idAnimalApadrinhado;
     }
 }

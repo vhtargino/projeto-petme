@@ -36,8 +36,8 @@ public class ApadrinhamentoDAO {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, apadrinhamento.getIdApadrinhamento());
             stmt.setDouble(2, apadrinhamento.getQuantiaMensal());
-            stmt.setInt(3, apadrinhamento.pegarIdInstanciaPessoa());
-            stmt.setInt(4, apadrinhamento.pegarIdInstanciaAnimal());
+            stmt.setInt(3, apadrinhamento.getIdPessoaPadrinho());
+            stmt.setInt(4, apadrinhamento.getIdAnimalApadrinhado());
             stmt.execute();
             stmt.close();
             System.out.println("Apadrinhamento cadastrado com sucesso.");

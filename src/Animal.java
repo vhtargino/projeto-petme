@@ -48,4 +48,14 @@ public class Animal {
     public void setColoracao(String coloracao) {
         this.coloracao = coloracao;
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "idAnimal=" + idAnimal +
+                ", nomeAnimal='" + nomeAnimal + '\'' +
+                ", especie='" + especie + '\'' +
+                ", coloracao='" + coloracao + '\'' +
+                '}';
+    }
 }
