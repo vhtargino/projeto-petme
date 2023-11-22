@@ -91,11 +91,15 @@ public class Main {
                     PessoaDAO pessoaDAO = new PessoaDAO();
 
                     System.out.println("Digite o ID da Pessoa para apadrinhamento:");
-                    int idPessoaSelecionada = sc2.nextInt(); /
+                    int idPessoaSelecionada = sc2.nextInt();
                     Pessoa pessoaSelecionada = pessoaDAO.buscarPorId(idPessoaSelecionada);
 
                     if (animalEscolhido != null && pessoaSelecionada != null) {
                         Apadrinhamento apadrinhamento = new Apadrinhamento();
+                        apadrinhamento.setIdApadrinhamento(1);
+                        System.out.println("Digite um valor que você deseja enviar ao animal: ");
+                        double valor = sc2.nextDouble();
+                        apadrinhamento.setQuantiaMensal(valor);
                         apadrinhamento.setAnimal(animalEscolhido);
                         apadrinhamento.setPessoa(pessoaSelecionada);
                         ApadrinhamentoDAO apadrinhamentoDAO = new ApadrinhamentoDAO();
