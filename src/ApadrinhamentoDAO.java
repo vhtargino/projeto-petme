@@ -70,7 +70,7 @@ public class ApadrinhamentoDAO {
 
     // Read por ID
     public Apadrinhamento buscarPorId(int idApadrinhamento) {
-        String sql = "SELECT quantia_mensal, id_pessoa, id_animal FROM apadrinhamento WHERE id_apadrinhamento = ?";
+        String sql = "SELECT id_apadrinhamento, quantia_mensal, id_pessoa, id_animal FROM apadrinhamento WHERE id_apadrinhamento = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, idApadrinhamento);

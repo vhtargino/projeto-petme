@@ -104,8 +104,12 @@ public class Main {
                                 Pessoa pessoaEncontrada = pd3.buscarPorId(idBuscaPessoa);
 
                                 if (pessoaEncontrada != null) {
-                                    System.out.println("Padrinho encontrado: " +
-                                            pessoaEncontrada.getNomePessoa());
+                                    System.out.println("Padrinho encontrado: \n" +
+                                            "Nome: " + pessoaEncontrada.getNomePessoa() +
+                                            ", Cidade: " + pessoaEncontrada.getCidade() +
+                                            ", Estado: " + pessoaEncontrada.getEstado() +
+                                            ", E-mail: " + pessoaEncontrada.getEmail() +
+                                            ", Whatsapp: " + pessoaEncontrada.getWhatsapp());
                                 } else {
                                     System.out.println("Padrinho não encontrada.");
                                 }
@@ -157,11 +161,10 @@ public class Main {
                                 System.out.println("Escolha dentre as opções do menu");
                         }
                     } while (flagMenu2 == false);
+
                     flagMenu1 = false;
                     break;
                 case "2":
-                    System.out.println("Escolheu 2");
-
                     boolean flagMenu3 = false;
 
                     do {
@@ -237,8 +240,10 @@ public class Main {
                                 Animal animalEncontrado = ad3.buscarPorId(idBuscaAnimal);
 
                                 if (animalEncontrado != null) {
-                                    System.out.println("Pet encontrado: " +
-                                            animalEncontrado.getNomeAnimal());
+                                    System.out.println("Pet encontrado: \n" +
+                                            "Nome: " + animalEncontrado.getNomeAnimal() +
+                                            ", Espécie: " + animalEncontrado.getEspecie() +
+                                            ", Coloração: " + animalEncontrado.getColoracao());
                                 } else {
                                     System.out.println("Pet não encontrado.");
                                 }
@@ -294,9 +299,182 @@ public class Main {
                     flagMenu1 = false;
                     break;
                 case "3":
-                    System.out.println("Escolheu 3");
+                    boolean flagMenu4 = false;
 
-                    // Switch case para o apadrinhamento aqui
+                    do {
+                        System.out.println("");
+                        System.out.println("=========================");
+                        System.out.println("O que deseja fazer?");
+                        System.out.println("1. Cadastrar apadrinhamento");
+                        System.out.println("2. Listar apadrinhamentos");
+                        System.out.println("3. Pesquisar apadrinhamento");
+                        System.out.println("4. Atualizar cadastro de apadrinhamento");
+                        System.out.println("5. Excluir cadastro de apadrinhamento");
+                        System.out.println("6. Voltar");
+                        System.out.println("=========================");
+                        System.out.println("");
+
+                        System.out.print("Sua escolha: ");
+                        String escolhaMenu4 = sc1.nextLine();
+
+                        switch (escolhaMenu4) {
+                            case "1":
+                                System.out.println("");
+                                System.out.println("=========================");
+                                System.out.println("CADASTRAR APADRINHAMENTO");
+                                System.out.println("=========================");
+                                System.out.println("");
+
+                                Apadrinhamento ap = new Apadrinhamento();
+
+                                System.out.print("Digite o ID do apadrinhamento: ");
+                                ap.setIdApadrinhamento(sc2.nextInt());
+                                System.out.print("Digite a quantia mensal: ");
+                                ap.setQuantiaMensal(sc2.nextDouble());
+
+                                PessoaDAO pd = new PessoaDAO();
+                                ArrayList<Pessoa> pessoas = pd.listar();
+
+                                boolean flagId = false;
+                                int contador = 0;
+                                do {
+                                    System.out.print("Digite o ID do padrinho: ");
+                                    int idPadrinho = sc2.nextInt();
+
+                                    for (Pessoa p : pessoas) {
+                                        if (p.getIdPessoa() == idPadrinho) {
+                                            ap.setPessoa(p);
+                                            flagId = true;
+                                            break;
+                                        } else {
+                                            contador++;
+                                        }
+
+                                        if (contador == pessoas.size()) {
+                                            System.out.println("ID não encontrado. Tente novamente.");
+                                            flagId = false;
+                                        }
+                                    }
+                                } while (flagId == false);
+
+                                AnimalDAO ad = new AnimalDAO();
+                                ArrayList<Animal> animais = ad.listar();
+
+                                flagId = false;
+                                contador = 0;
+                                do {
+                                    System.out.print("Digite o ID do pet: ");
+                                    int idPet = sc2.nextInt();
+
+                                    for (Animal a : animais) {
+                                        if (a.getIdAnimal() == idPet) {
+                                            ap.setAnimal(a);
+                                            flagId = true;
+                                            break;
+                                        } else {
+                                            contador++;
+                                        }
+
+                                        if (contador == pessoas.size()) {
+                                            System.out.println("ID não encontrado. Tente novamente.");
+                                            flagId = false;
+                                        }
+                                    }
+                                } while (flagId == false);
+
+                                ApadrinhamentoDAO apd = new ApadrinhamentoDAO();
+                                apd.adiciona(ap);
+
+                                flagMenu4 = false;
+                                break;
+                            case "2":
+                                System.out.println("");
+                                System.out.println("=========================");
+                                System.out.println("LISTAR APADRINHAMENTOS");
+                                System.out.println("=========================");
+                                System.out.println("");
+
+                                ApadrinhamentoDAO apd2 = new ApadrinhamentoDAO();
+
+                                ArrayList<Apadrinhamento> apadrinhamentos = apd2.listar();
+                                for (Apadrinhamento apadrinhamento : apadrinhamentos) {
+                                    System.out.println("ID: " + apadrinhamento.getIdApadrinhamento() +
+                                            ", Quantia mensal: " + apadrinhamento.getQuantiaMensal() +
+                                            ", ID do padrinho: " + apadrinhamento.getIdPessoaPadrinho() +
+                                            ", ID do pet: " + apadrinhamento.getIdAnimalApadrinhado());
+                                }
+
+                                flagMenu4 = false;
+                                break;
+                            case "3":
+                                System.out.println("");
+                                System.out.println("=========================");
+                                System.out.println("PESQUISAR APADRINHAMENTO");
+                                System.out.println("=========================");
+                                System.out.println("");
+
+                                System.out.print("Digite o ID do apadrinhamento: ");
+                                int idBuscaApadrinhamento = sc2.nextInt();
+
+                                ApadrinhamentoDAO apd1 = new ApadrinhamentoDAO();
+                                Apadrinhamento apadrinhamentoEncontrado = apd1.buscarPorId(idBuscaApadrinhamento);
+
+                                if (apadrinhamentoEncontrado != null) {
+                                    System.out.println("ID: " + apadrinhamentoEncontrado.getIdApadrinhamento() +
+                                            ", Quantia mensal: " + apadrinhamentoEncontrado.getQuantiaMensal() +
+                                            ", ID do padrinho: " + apadrinhamentoEncontrado.getIdPessoaPadrinho() +
+                                            ", ID do pet: " + apadrinhamentoEncontrado.getIdAnimalApadrinhado());
+                                } else {
+                                    System.out.println("Apadrinhamento não encontrado.");
+                                }
+
+                                flagMenu4 = false;
+                                break;
+                            case "4":
+                                System.out.println("");
+                                System.out.println("=========================");
+                                System.out.println("ATUALIZAR CADASTRO DE APADRINHAMENTO");
+                                System.out.println("=========================");
+                                System.out.println("");
+
+                                System.out.print("Digite o ID do apadrinhamento a ser atualizdo: ");
+                                int idAtualizaApadrinhamento = sc2.nextInt();
+
+                                ApadrinhamentoDAO apd3 = new ApadrinhamentoDAO();
+
+                                Apadrinhamento apadrinhamentoAtt = apd3.buscarPorId(idAtualizaApadrinhamento);
+                                if (apadrinhamentoAtt != null) {
+                                    System.out.print("Digite a nova quantia: ");
+                                    apadrinhamentoAtt.setQuantiaMensal(sc1.nextDouble());
+                                    apd3.atualiza(apadrinhamentoAtt);
+                                }
+
+                                flagMenu4 = false;
+                                break;
+                            case "5":
+                                System.out.println("");
+                                System.out.println("=========================");
+                                System.out.println("EXCLUIR CADASTRO DE APADRINHAMENTO");
+                                System.out.println("=========================");
+                                System.out.println("");
+
+                                System.out.print("Digite o ID do apadrinhamento a ser excluído: ");
+                                int idExcluirApadrinhamento = sc2.nextInt();
+
+                                ApadrinhamentoDAO apd4 = new ApadrinhamentoDAO();
+
+                                apd4.exclui(idExcluirApadrinhamento);
+
+                                flagMenu4 = false;
+                                break;
+                            case "6":
+                                System.out.println("Voltando para o menu anterior");
+                                flagMenu4 = true;
+                                break;
+                            default:
+                                System.out.println("Escolha dentre as opções do menu");
+                        }
+                    } while (flagMenu4 == false);
 
                     flagMenu1 = false;
                     break;
