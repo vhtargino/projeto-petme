@@ -1,3 +1,5 @@
+import com.sun.nio.sctp.PeerAddressChangeNotification;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,8 +53,7 @@ public class Main {
 
                                 Pessoa p1 = new Pessoa();
 
-                                System.out.print("Digite o ID do padrinho: ");
-                                p1.setIdPessoa(sc2.nextInt());
+                                p1.setIdPessoa(obterNumeroInteiro(sc2, "Digite o ID do padrinho: "));
                                 System.out.print("Digite o nome do padrinho: ");
                                 p1.setNomePessoa(sc1.nextLine());
                                 System.out.print("Digite a cidade do padrinho: ");
@@ -97,8 +98,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do padrinho: ");
-                                int idBuscaPessoa = sc2.nextInt();
+                                int idBuscaPessoa = obterNumeroInteiro(sc2, "Digite o ID do padrinho: ");
 
                                 PessoaDAO pd3 = new PessoaDAO();
                                 Pessoa pessoaEncontrada = pd3.buscarPorId(idBuscaPessoa);
@@ -123,8 +123,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do padrinho a ser atualizdo: ");
-                                int idAtualizaPessoa = sc2.nextInt();
+                                int idAtualizaPessoa = obterNumeroInteiro(sc2, "Digite o ID do padrinho a ser atualizado: ");
 
                                 PessoaDAO pd4 = new PessoaDAO();
 
@@ -144,8 +143,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do padrinho a ser excluído: ");
-                                int idExcluirPessoa = sc2.nextInt();
+                                int idExcluirPessoa = obterNumeroInteiro(sc2, "Digite o ID do padrinho a ser excluído: ");
 
                                 PessoaDAO pd5 = new PessoaDAO();
 
@@ -193,8 +191,7 @@ public class Main {
 
                                 Animal a1 = new Animal();
 
-                                System.out.print("Digite o ID do pet: ");
-                                a1.setIdAnimal(sc2.nextInt());
+                                a1.setIdAnimal(obterNumeroInteiro(sc2, "Digite o ID do pet: "));
                                 System.out.print("Digite o nome do pet: ");
                                 a1.setNomeAnimal(sc1.nextLine());
                                 System.out.print("Digite a espécie do pet: ");
@@ -233,8 +230,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do pet: ");
-                                int idBuscaAnimal = sc2.nextInt();
+                                int idBuscaAnimal = obterNumeroInteiro(sc2, "Digite o ID do pet: ");
 
                                 AnimalDAO ad3 = new AnimalDAO();
                                 Animal animalEncontrado = ad3.buscarPorId(idBuscaAnimal);
@@ -257,8 +253,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do pet a ser atualizdo: ");
-                                int idAtualizaAnimal = sc2.nextInt();
+                                int idAtualizaAnimal = obterNumeroInteiro(sc2, "Digite o ID do pet a ser atualizado: ");
 
                                 AnimalDAO ad4 = new AnimalDAO();
 
@@ -278,8 +273,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do pet a ser excluído: ");
-                                int idExcluirPet = sc2.nextInt();
+                                int idExcluirPet = obterNumeroInteiro(sc2, "Digite o ID do pet a ser excluído: ");
 
                                 AnimalDAO ad5 = new AnimalDAO();
 
@@ -327,10 +321,8 @@ public class Main {
 
                                 Apadrinhamento ap = new Apadrinhamento();
 
-                                System.out.print("Digite o ID do apadrinhamento: ");
-                                ap.setIdApadrinhamento(sc2.nextInt());
-                                System.out.print("Digite a quantia mensal: ");
-                                ap.setQuantiaMensal(sc2.nextDouble());
+                                ap.setIdApadrinhamento(obterNumeroInteiro(sc2, "Digite o ID do apadrinhamento: "));
+                                ap.setQuantiaMensal(obterDouble(sc2, "Digite a quantia mensal: "));
 
                                 PessoaDAO pd = new PessoaDAO();
                                 ArrayList<Pessoa> pessoas = pd.listar();
@@ -338,8 +330,7 @@ public class Main {
                                 boolean flagId = false;
                                 int contador = 0;
                                 do {
-                                    System.out.print("Digite o ID do padrinho: ");
-                                    int idPadrinho = sc2.nextInt();
+                                    int idPadrinho = obterNumeroInteiro(sc2, "Digite o ID do padrinho: ");
 
                                     for (Pessoa p : pessoas) {
                                         if (p.getIdPessoa() == idPadrinho) {
@@ -363,8 +354,7 @@ public class Main {
                                 flagId = false;
                                 contador = 0;
                                 do {
-                                    System.out.print("Digite o ID do pet: ");
-                                    int idPet = sc2.nextInt();
+                                    int idPet = obterNumeroInteiro(sc2, "Digite o ID do pet: ");
 
                                     for (Animal a : animais) {
                                         if (a.getIdAnimal() == idPet) {
@@ -413,8 +403,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do apadrinhamento: ");
-                                int idBuscaApadrinhamento = sc2.nextInt();
+                                int idBuscaApadrinhamento = obterNumeroInteiro(sc2, "Digite o ID do apadrinhamento: ");
 
                                 ApadrinhamentoDAO apd1 = new ApadrinhamentoDAO();
                                 Apadrinhamento apadrinhamentoEncontrado = apd1.buscarPorId(idBuscaApadrinhamento);
@@ -437,15 +426,13 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do apadrinhamento a ser atualizdo: ");
-                                int idAtualizaApadrinhamento = sc2.nextInt();
+                                int idAtualizaApadrinhamento = obterNumeroInteiro(sc2, "Digite o ID do apadrinhamento a ser atualizado: ");
 
                                 ApadrinhamentoDAO apd3 = new ApadrinhamentoDAO();
 
                                 Apadrinhamento apadrinhamentoAtt = apd3.buscarPorId(idAtualizaApadrinhamento);
                                 if (apadrinhamentoAtt != null) {
-                                    System.out.print("Digite a nova quantia: ");
-                                    apadrinhamentoAtt.setQuantiaMensal(sc1.nextDouble());
+                                    apadrinhamentoAtt.setQuantiaMensal(obterDouble(sc2, "Digite a nova quantia mensal: "));
                                     apd3.atualiza(apadrinhamentoAtt);
                                 }
 
@@ -458,8 +445,7 @@ public class Main {
                                 System.out.println("=========================");
                                 System.out.println("");
 
-                                System.out.print("Digite o ID do apadrinhamento a ser excluído: ");
-                                int idExcluirApadrinhamento = sc2.nextInt();
+                                int idExcluirApadrinhamento = obterNumeroInteiro(sc2, "Digite o ID do apadrinhamento a ser excluído: ");
 
                                 ApadrinhamentoDAO apd4 = new ApadrinhamentoDAO();
 
@@ -486,5 +472,55 @@ public class Main {
                     System.out.println("Escolha dentre as opções do menu");
             }
         } while(flagMenu1 == false);
+    }
+
+    // Método para não permitir a entrada de strings e forçar o usuário a digitar ints
+    private static int obterNumeroInteiro(Scanner scanner, String mensagem) {
+        int numero = 0;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            try {
+                System.out.print(mensagem);
+                String input = scanner.nextLine().trim();
+
+                if (input.isEmpty()) {
+                    throw new java.util.InputMismatchException();
+                }
+
+                numero = Integer.parseInt(input);
+                entradaValida = true;
+            } catch (java.util.InputMismatchException | NumberFormatException e) {
+                System.out.println("Por favor, digite um número válido.");
+            }
+        }
+        return numero;
+    }
+
+    // Método semelhante para forçar doubles
+    private static double obterDouble(Scanner scanner, String mensagem) {
+        double numero = 0;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            try {
+                System.out.print(mensagem);
+                String input = scanner.nextLine().trim();
+
+                if (input.isEmpty()) {
+                    throw new java.util.InputMismatchException();
+                }
+
+                numero = Double.parseDouble(input);
+                entradaValida = true;
+            } catch (java.util.InputMismatchException | NumberFormatException e) {
+                System.out.println("Por favor, digite um número válido.");
+            }
+        }
+        return numero;
+    }
+
+    private static void padrinhoExiste() {
+
     }
 }

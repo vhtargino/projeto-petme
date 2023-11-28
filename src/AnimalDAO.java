@@ -11,26 +11,33 @@ public class AnimalDAO {
         this.connection = new Conexao().GeraConexao();
     }
 
-//    private boolean animalJaExiste(int idAnimal) {
-//        String sql = "SELECT COUNT(*) FROM animais WHERE id_animal = ?";
-//        try {
-//            PreparedStatement stmt = connection.prepareStatement(sql);
-//            stmt.setInt(1, idAnimal);
-//            ResultSet resultSet = stmt.executeQuery();
-//            int count = resultSet.getInt(1);
-//            stmt.close();
-//            return count > 0;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    private boolean animalJaExiste(int idAnimal) {
+        String sql = "SELECT COUNT(*) FROM animais WHERE id_animal = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idAnimal);
+            ResultSet resultSet = stmt.executeQuery();
+
+            // Verifica se há pelo menos um resultado no conjunto
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                stmt.close();
+                return count > 0;
+            } else {
+                stmt.close();
+                return false; // Retorna falso se não houver resultados
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Create
     public void adiciona(Animal animal) {
-//        if (animalJaExiste(animal.getIdAnimal())) {
-//            System.out.println("Animal com ID " + animal.getIdAnimal() + " já existe na tabela.");
-//            return;
-//        }
+        if (animalJaExiste(animal.getIdAnimal())) {
+            System.out.println("Animal com ID " + animal.getIdAnimal() + " já existe na tabela.");
+            return;
+        }
 
         String sql = "INSERT INTO animais(id_animal, nome_animal, especie, coloracao) VALUES(?,?,?,?)";
         try {
