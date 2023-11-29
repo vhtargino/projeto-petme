@@ -1,22 +1,24 @@
-public class Animal {
+import java.util.ArrayList;
+
+public abstract class Animal {
     // Atributos
     private int idAnimal;
     private String nomeAnimal;
-    private String especie;
     private String coloracao;
 
     // Construtores
     public Animal() {
     }
 
-    public Animal(int idAnimal, String nomeAnimal, String especie, String coloracao) {
-        this.idAnimal = idAnimal;
+    public Animal(String nomeAnimal, String coloracao) {
         this.nomeAnimal = nomeAnimal;
-        this.especie = especie;
         this.coloracao = coloracao;
     }
 
     // Getters e setters
+
+    public abstract String getEspecie();
+
     public int getIdAnimal() {
         return idAnimal;
     }
@@ -33,19 +35,23 @@ public class Animal {
         this.nomeAnimal = nomeAnimal;
     }
 
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
     public String getColoracao() {
         return coloracao;
     }
 
     public void setColoracao(String coloracao) {
         this.coloracao = coloracao;
+    }
+
+    public static void listarAnimais() {
+        AnimalDAO ad2 = new AnimalDAO();
+
+        ArrayList<Animal> animais = ad2.listar();
+        for (Animal animal : animais) {
+            System.out.println("ID: " + animal.getIdAnimal() +
+                    ", Nome: " + animal.getNomeAnimal() +
+                    ", Espécie: " + animal.getEspecie() +
+                    ", Coloração: " + animal.getColoracao());
+        }
     }
 }
