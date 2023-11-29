@@ -11,6 +11,7 @@ public class Apadrinhamento {
     public Apadrinhamento() {
     }
 
+
     // Getters e setters
     public int getIdApadrinhamento() {
         return idApadrinhamento;

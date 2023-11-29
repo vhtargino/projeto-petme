@@ -8,7 +8,7 @@ public class Conexao {
         Connection conexao = null;
 
         try{
-            String url = "jdbc:mysql://localhost/petme";
+            String url = "jdbc:mysql://localhost:3306/petme";
             String usuario = "root";
             String senha = "root";
             conexao = DriverManager.getConnection(url, usuario, senha);
