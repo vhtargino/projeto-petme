@@ -1,0 +1,28 @@
+CREATE DATABASE petme;
+
+USE petme;
+
+CREATE TABLE pessoas (
+id_pessoa INT PRIMARY KEY not null auto_increment,
+nome_pessoa VARCHAR(50),
+cidade VARCHAR(50),
+estado VARCHAR(2),
+email VARCHAR(50),
+whatsapp VARCHAR(15)
+);
+
+CREATE TABLE animais (
+id_animal INT PRIMARY KEY not null auto_increment,
+nome_animal VARCHAR(50),
+especie VARCHAR(50),
+coloracao VARCHAR(50)
+);
+
+CREATE TABLE apadrinhamento (
+id_apadrinhamento INT PRIMARY KEY not null auto_increment,
+quantia_mensal DOUBLE,
+id_pessoa INT,
+id_animal INT,
+FOREIGN KEY (id_pessoa) REFERENCES pessoas(id_pessoa),
+FOREIGN KEY (id_animal) REFERENCES animais(id_animal)
+);
