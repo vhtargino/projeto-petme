@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Pessoa {
     // Atributos
     private int idPessoa;
@@ -11,13 +13,13 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(int idPessoa, String nomePessoa, String cidade, String estado, String email, String whatsapp) {
-        this.idPessoa = idPessoa;
+    public Pessoa(String nomePessoa, String cidade, String estado, String email, String whatsapp) {
         this.nomePessoa = nomePessoa;
         this.cidade = cidade;
         this.estado = estado;
         this.email = email;
         this.whatsapp = whatsapp;
+
     }
 
     // Getters e setters
@@ -67,5 +69,19 @@ public class Pessoa {
 
     public void setWhatsapp(String whatsapp) {
         this.whatsapp = whatsapp;
+    }
+
+    public static void listarPessoas() {
+        PessoaDAO pd2 = new PessoaDAO();
+
+        ArrayList<Pessoa> pessoas = pd2.listar();
+        for (Pessoa pessoa : pessoas) {
+            System.out.println("ID: " + pessoa.getIdPessoa() +
+                    ", Nome: " + pessoa.getNomePessoa() +
+                    ", Cidade: " + pessoa.getCidade() +
+                    ", Estado: " + pessoa.getEstado() +
+                    ", E-mail: " + pessoa.getEmail() +
+                    ", Whatsapp: " + pessoa.getWhatsapp());
+        }
     }
 }

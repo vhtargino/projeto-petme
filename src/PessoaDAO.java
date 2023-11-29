@@ -11,41 +11,17 @@ public class PessoaDAO {
         this.connection = new Conexao().GeraConexao();
     }
 
-    private boolean pessoaJaExiste(int idPessoa) {
-        String sql = "SELECT COUNT(*) FROM pessoas WHERE id_pessoa = ?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, idPessoa);
-            ResultSet resultSet = stmt.executeQuery();
-
-            // Verifica se há pelo menos um resultado no conjunto
-            if (resultSet.next()) {
-                int count = resultSet.getInt(1);
-                stmt.close();
-                return count > 0;
-            } else {
-                stmt.close();
-                return false; // Retorna falso se não houver resultados
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     // Create
     public void adiciona(Pessoa pessoa) {
-        if (pessoaJaExiste(pessoa.getIdPessoa())) { System.out.println("Pessoa com ID " + pessoa.getIdPessoa() + " já existe na tabela."); return;
-        }
 
-        String sql = "INSERT INTO pessoas(id_pessoa, nome_pessoa, cidade, estado, email, whatsapp) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO pessoas(nome_pessoa, cidade, estado, email, whatsapp) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, pessoa.getIdPessoa());
-            stmt.setString(2, pessoa.getNomePessoa());
-            stmt.setString(3, pessoa.getCidade());
-            stmt.setString(4, pessoa.getEstado());
-            stmt.setString(5, pessoa.getEmail());
-            stmt.setString(6, pessoa.getWhatsapp());
+            stmt.setString(1, pessoa.getNomePessoa());
+            stmt.setString(2, pessoa.getCidade());
+            stmt.setString(3, pessoa.getEstado());
+            stmt.setString(4, pessoa.getEmail());
+            stmt.setString(5, pessoa.getWhatsapp());
             stmt.execute();
             stmt.close();
             System.out.println("Usuário cadastrado com sucesso.");
@@ -57,18 +33,20 @@ public class PessoaDAO {
     // Read
     public ArrayList<Pessoa> listar() {
         ArrayList<Pessoa> pessoas = new ArrayList<>();
-        String sql = "SELECT id_pessoa, nome_pessoa, cidade, estado, email, whatsapp FROM pessoas";
+        String sql = "SELECT * FROM pessoas";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
-                Pessoa pessoa = new Pessoa();
+                Pessoa pessoa = new Pessoa(
+                        resultSet.getString("nome_pessoa"),
+                        resultSet.getString("cidade"),
+                        resultSet.getString("estado"),
+                        resultSet.getString("email"),
+                        resultSet.getString("whatsapp")
+                        );
                 pessoa.setIdPessoa(resultSet.getInt("id_pessoa"));
-                pessoa.setNomePessoa(resultSet.getString("nome_pessoa"));
-                pessoa.setCidade(resultSet.getString("cidade"));
-                pessoa.setEstado(resultSet.getString("estado"));
-                pessoa.setEmail(resultSet.getString("email"));
-                pessoa.setWhatsapp(resultSet.getString("whatsapp"));
+
                 pessoas.add(pessoa);
             }
             stmt.close();
@@ -80,19 +58,21 @@ public class PessoaDAO {
 
     // Read por ID
     public Pessoa buscarPorId(int idPessoa) {
-        String sql = "SELECT id_pessoa, nome_pessoa, cidade, estado, email, whatsapp FROM pessoas WHERE id_pessoa = ?";
+        String sql = "SELECT * FROM pessoas WHERE id_pessoa = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, idPessoa);
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
-                Pessoa pessoa = new Pessoa();
+                Pessoa pessoa = new Pessoa(
+                        resultSet.getString("nome_pessoa"),
+                        resultSet.getString("cidade"),
+                        resultSet.getString("estado"),
+                        resultSet.getString("email"),
+                        resultSet.getString("whatsapp")
+                );
                 pessoa.setIdPessoa(resultSet.getInt("id_pessoa"));
-                pessoa.setNomePessoa(resultSet.getString("nome_pessoa"));
-                pessoa.setCidade(resultSet.getString("cidade"));
-                pessoa.setEstado(resultSet.getString("estado"));
-                pessoa.setEmail(resultSet.getString("email"));
-                pessoa.setWhatsapp(resultSet.getString("whatsapp"));
+
                 stmt.close();
                 return pessoa;
             } else {
